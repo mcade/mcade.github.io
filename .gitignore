@@ -1,3 +1,8 @@
 /.env
 /.DS_Store
 /online-cv
+/node_modules
+/dist
+/coverage
+/.vite
+performative-ui-*.tgz
