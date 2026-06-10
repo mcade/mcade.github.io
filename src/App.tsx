@@ -348,7 +348,7 @@ const projects: Project[] = [
     bullets: [
       "Framed a developer pain point as a direct service: stop pushing the ship date back and get live help.",
       "Designed two-sided marketplace language for people needing help and developers providing it.",
-      "Built the positioning, inactive static site, and interaction model around fast problem resolution.",
+      "Built the positioning and interaction model around fast problem resolution.",
     ],
     filename: "~/products/call-a-dev/live-help.ts",
     tokens: [
