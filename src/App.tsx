@@ -6,8 +6,10 @@ import {
   CommunityBadge,
   EyebrowPill,
   FloatingSparkles,
+  GradientText,
   MockIDE,
   NodeGraphBackground,
+  Rotator,
   Sparkle,
   StatusDot,
   WordRoll,
@@ -448,12 +450,11 @@ function App() {
               <h1>
                 <span>I build AI-powered products for</span>
                 <span className="hero-rotator" aria-live="polite">
-                  <WordRoll
-                    words={["patients", "songwriters", "operators", "founders"]}
-                    intervalMs={1800}
-                    transitionMs={520}
-                    gradient
-                  />
+                  <GradientText>
+                    <Rotator
+                      words={["patients", "songwriters", "operators", "founders"]}
+                    />
+                  </GradientText>
                 </span>
               </h1>
               <p>
