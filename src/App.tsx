@@ -1,5 +1,4 @@
 import type { CSSProperties, ReactElement } from "react";
-import type { IdeToken } from "performative-ui";
 import {
   AsciiHero,
   Button,
@@ -7,20 +6,16 @@ import {
   EyebrowPill,
   FloatingSparkles,
   GradientText,
-  MockIDE,
   NodeGraphBackground,
   Rotator,
   Sparkle,
   StatusDot,
-  WordRoll,
 } from "performative-ui";
 import {
   ArrowDown,
   AudioWaveform,
   Bot,
   BriefcaseBusiness,
-  CheckCircle2,
-  ChevronDown,
   Clock3,
   Code2,
   ExternalLink,
@@ -37,6 +32,11 @@ import {
   Users,
 } from "lucide-react";
 import { SlippyWords, type SlippyWord } from "./components/SlippyWords";
+import ggTranslatorImage from "../website-pics/ggtranslator-landing-page.webp";
+import patientGlueImage from "../website-pics/patient-glue-landing-page.webp";
+import peoplesVoicemailImage from "../website-pics/peoples-voicemail-landing-page.webp";
+import spitNotesImage from "../website-pics/spit-notes-landing-page.webp";
+import squatclockImage from "../website-pics/squatclock-landing-page.webp";
 
 type Project = {
   id: string;
@@ -49,14 +49,10 @@ type Project = {
   tags: string[];
   icon: ReactElement;
   bullets: string[];
-  filename: string;
-  tokens: IdeToken[];
+  image?: string;
+  imageAlt?: string;
+  imagePosition?: string;
 };
-
-const t = (c: string, cls: IdeToken["cls"] = ""): IdeToken => ({ c, cls });
-
-const ideLineCount = (tokens: IdeToken[]) =>
-  Math.max(7, tokens.map((token) => token.c).join("").split("\n").length);
 
 const links = {
   email: "mailto:mcadenhe@gmail.com",
@@ -97,215 +93,103 @@ const projects: Project[] = [
     name: "Spit Notes",
     href: "https://getspitnotes.com",
     status: "Live product",
-    tagline: "A songwriting app that keeps lyrics and audio in one workspace.",
-    role: "Founder, product builder, iOS app owner",
+    tagline: "The fastest notes app for songwriters to capture lyrics, recordings, and half-finished ideas before they disappear.",
+    role: "Founder · Product, design, and iOS development",
     accent: "#a7ff3d",
-    tags: ["OpenAI", "ElevenLabs", "BS-RoFormer", "iOS", "Agents"],
+    tags: ["Songwriting", "iOS", "AI-assisted writing", "Audio tools"],
     icon: <AudioWaveform aria-hidden="true" />,
     bullets: [
-      "Designed around a personal creator workflow: lyrics, melodies, voice memos, and fragments should live together.",
-      "Integrated AI to break writer's block, improve transcription alignment, and separate audio into stems.",
-      "Used orchestration of AI agents to write the codebase and compress the path from idea to shipped app.",
+      "Unifies the two places song ideas usually get lost: Notes and Voice Memos.",
+      "Helps writers move through creative blocks, align recordings to lyrics, and isolate vocal or instrumental stems.",
+      "Built from my own songwriting workflow and shipped as a real App Store product.",
     ],
-    filename: "~/products/spit-notes/song-idea-workspace.ts",
-    tokens: [
-      t("// Spit Notes: AI-assisted songwriting workspace\n", "com"),
-      t("const ", "key"),
-      t("user ", ""),
-      t("= ", ""),
-      t('"songwriter with ideas split across Notes and Voice Memos"', "str"),
-      t(";\n\n"),
-      t("ship", "fn"),
-      t("({\n"),
-      t("  insight", "key"),
-      t(": "),
-      t('"song ideas arrive as fragments, not documents"', "str"),
-      t(",\n"),
-      t("  ai", "key"),
-      t(": ["),
-      t('"lyric unblocker"', "str"),
-      t(", "),
-      t('"forced alignment"', "str"),
-      t(", "),
-      t('"stem splitting"', "str"),
-      t("],\n"),
-      t("  product_call", "key"),
-      t(": "),
-      t('"keep words and recordings side by side"', "str"),
-      t(",\n"),
-      t("  build_mode", "key"),
-      t(": "),
-      t('"agent-orchestrated iOS development"', "str"),
-      t("\n});\n"),
-    ],
-  },
-  {
-    id: "patient-glue",
-    name: "Patient Glue",
-    href: "https://patient-glue-static.pages.dev/",
-    status: "Static case site",
-    tagline: "Healthcare SMS automation for scheduling, reminders, waitlists, and follow-ups.",
-    role: "Founder, roadmap owner, support lead",
-    accent: "#19d7ff",
-    tags: ["Healthcare", "SMS", "BERT", "EHR", "HIPAA"],
-    icon: <Stethoscope aria-hidden="true" />,
-    bullets: [
-      "Founded a healthcare SaaS after seeing expensive, underpowered messaging inside day-to-day clinical operations.",
-      "Owned the product loop from customer feedback to roadmap decisions, implementation, troubleshooting, and enablement.",
-      "Used a BERT classifier to detect reschedule intent and route patients into an SMS rescheduling workflow.",
-    ],
-    filename: "~/products/patient-glue/reschedule-intent.ts",
-    tokens: [
-      t("// Patient Glue: productized healthcare communication\n", "com"),
-      t("async function ", "key"),
-      t("triageIncomingText", "fn"),
-      t("(message: PatientSMS) {\n"),
-      t("  const ", "key"),
-      t("intent = "),
-      t("await ", "key"),
-      t("bert", "fn"),
-      t(".classify(message.body);\n\n"),
-      t("  if ", "key"),
-      t("(intent === "),
-      t('"reschedule"', "str"),
-      t(") {\n"),
-      t("    return ", "key"),
-      t("startWorkflow", "fn"),
-      t("("),
-      t('"manual_sms_reschedule"', "str"),
-      t(", message.patientId);\n"),
-      t("  }\n\n"),
-      t("  return ", "key"),
-      t("routeToCareTeam", "fn"),
-      t("(message);\n"),
-      t("}\n"),
-    ],
+    image: spitNotesImage,
+    imageAlt: "Spit Notes landing page showing the songwriting app and its Finish More Songs message",
+    imagePosition: "center top",
   },
   {
     id: "squatclock",
     name: "SquatClock",
     href: "https://squatclock.com",
     status: "Live product",
-    tagline: "A movement-reminder product for desk workers who need simple squat breaks.",
-    role: "Solo product builder",
+    tagline: "A cross-platform movement reminder that makes an hourly squat break impossible to ignore and easy to finish.",
+    role: "Solo builder · Product, design, and development",
     accent: "#ff7a2f",
-    tags: ["Consumer", "Habits", "Health", "Web"],
+    tags: ["Behavior design", "Wellness", "Cross-platform", "Consumer"],
     icon: <Clock3 aria-hidden="true" />,
     bullets: [
-      "Turns a familiar health problem into a small, opinionated product loop.",
-      "Uses a sharp single-purpose landing page and a direct behavior-change promise.",
-      "Keeps the product surface intentionally lightweight so the habit is easy to adopt.",
+      "Turns the vague goal of sitting less into one clear action: ten squats every hour.",
+      "Meets users where they work with mobile apps and an animated desktop reminder.",
+      "Keeps the experience deliberately lightweight so the habit—not the app—stays in focus.",
     ],
-    filename: "~/products/squatclock/habit-loop.ts",
-    tokens: [
-      t("// SquatClock: tiny product, obvious behavior\n", "com"),
-      t("const ", "key"),
-      t("cadenceMinutes = "),
-      t("45", "num"),
-      t(";\n"),
-      t("const ", "key"),
-      t("promise = "),
-      t('"break free from your chair"', "str"),
-      t(";\n\n"),
-      t("schedule", "fn"),
-      t("({\n"),
-      t("  trigger", "key"),
-      t(": "),
-      t('"desk session"', "str"),
-      t(",\n"),
-      t("  action", "key"),
-      t(": "),
-      t('"squat break"', "str"),
-      t(",\n"),
-      t("  design_rule", "key"),
-      t(": "),
-      t('"no dashboard required"', "str"),
-      t("\n});\n"),
-    ],
+    image: squatclockImage,
+    imageAlt: "SquatClock landing page showing its mobile and desktop movement reminders",
+    imagePosition: "center top",
   },
   {
     id: "gg-translator",
     name: "GG Translator",
-    href: "https://gg-translator-static.pages.dev/",
-    status: "Static archive",
-    tagline: "A shipped desktop app that turns blunt multiplayer voice chat into constructive team comms.",
-    role: "Product designer and builder",
+    href: "https://ggtranslator.com",
+    status: "Live product",
+    tagline: "A desktop voice tool that turns heated multiplayer comms into something teammates can actually use.",
+    role: "Solo builder · Product, design, and desktop development",
     accent: "#ff4d8d",
-    tags: ["OpenAI", "Desktop", "Voice", "Gaming"],
+    tags: ["Voice communication", "Desktop", "Gaming", "AI tone translation"],
     icon: <Languages aria-hidden="true" />,
     bullets: [
-      "Built around a memorable user problem: multiplayer teams lose games when communication gets hostile.",
-      "Implemented voice capture, transformation, and playback as a real-time behavior layer.",
-      "Packaged the concept with pricing, FAQ, installation constraints, and a clear product promise.",
+      "Preserves the useful intent in a callout while removing the hostility that makes teams tune out.",
+      "Supports spoken input and paste-to-chat so it fits different games and communication styles.",
+      "Turns a playful premise into a downloadable product for both PC and Mac.",
     ],
-    filename: "~/products/gg-translator/voice-filter.ts",
-    tokens: [
-      t("// GG Translator: communication UX for competitive games\n", "com"),
-      t("const ", "key"),
-      t("input = "),
-      t('"RAGE into the machine"', "str"),
-      t(";\n\n"),
-      t("const ", "key"),
-      t("output = "),
-      t("await ", "key"),
-      t("openai", "fn"),
-      t(".rewrite({\n"),
-      t("  tone", "key"),
-      t(": "),
-      t('"constructive teammate"', "str"),
-      t(",\n"),
-      t("  mode", "key"),
-      t(": "),
-      t('"voice or paste to chat"', "str"),
-      t(",\n"),
-      t("  privacy", "key"),
-      t(": "),
-      t('"local-first except API request"', "str"),
-      t("\n});\n"),
+    image: ggTranslatorImage,
+    imageAlt: "GG Translator landing page showing its rage-to-constructive voice translation concept",
+    imagePosition: "38% center",
+  },
+  {
+    id: "patient-glue",
+    name: "Patient Glue",
+    href: "https://patient-glue-static.pages.dev/",
+    status: "Past venture",
+    tagline: "Healthcare messaging and scheduling automation designed around the real work of care teams.",
+    role: "Founder · Product, design, engineering, and support",
+    accent: "#19d7ff",
+    tags: ["Healthcare operations", "Patient messaging", "Scheduling", "EHR workflows"],
+    icon: <Stethoscope aria-hidden="true" />,
+    bullets: [
+      "Created an affordable two-way messaging alternative for practices limited by their EHR.",
+      "Automated scheduling, reminders, waitlists, follow-ups, and rescheduling conversations.",
+      "Owned the full customer loop, from discovery and roadmap decisions through onboarding and support.",
     ],
+    image: patientGlueImage,
+    imageAlt: "Patient Glue landing page presenting patient messaging and appointment tools for care teams",
+    imagePosition: "center center",
   },
   {
     id: "peoples-voicemail",
     name: "People's Voicemail",
     href: "https://pvm-static.pages.dev/",
-    status: "Static archive",
+    status: "Past product",
     tagline: "A voice-first community discussion platform for public voicemail boards.",
-    role: "Founder and full-stack builder",
+    role: "Founder · Product, design, and development",
     accent: "#f5d547",
-    tags: ["Voice", "Civic tech", "NLP", "Subscriptions"],
+    tags: ["Voice communities", "Civic tech", "Transcription", "Subscriptions"],
     icon: <MessageSquareText aria-hidden="true" />,
     bullets: [
       "Created a public voicemail box that worked like a voice-based community forum.",
       "Integrated transcription and language analysis to surface key phrases, sentiment, and constituent themes.",
       "Designed threaded reply mechanics, voter verification, reactions, and subscription pricing.",
     ],
-    filename: "~/products/peoples-voicemail/civic-audio.ts",
-    tokens: [
-      t("// People's Voicemail: civic feedback as audio data\n", "com"),
-      t("pipe", "fn"),
-      t("(\n"),
-      t("  inboundCall", "fn"),
-      t("(),\n"),
-      t("  transcribe", "fn"),
-      t("(),\n"),
-      t("  extractKeyPhrases", "fn"),
-      t("(),\n"),
-      t("  scoreSentiment", "fn"),
-      t("(),\n"),
-      t("  publishThread", "fn"),
-      t("({ verifiedVoter: "),
-      t("true", "key"),
-      t(" })\n"),
-      t(");\n"),
-    ],
+    image: peoplesVoicemailImage,
+    imageAlt: "People's Voicemail landing page inviting people to give voice to their community",
+    imagePosition: "center center",
   },
   {
     id: "family-blessings-phone",
     name: "Family Blessings Phone",
     href: "https://family-blessings-phone-static.pages.dev/",
-    status: "Static archive",
+    status: "Product archive",
     tagline: "A phone-based gratitude journal for families to share what they are thankful for.",
-    role: "Solo product builder",
+    role: "Solo builder · Product, design, and development",
     accent: "#66e2b3",
     tags: ["Voice", "Telecom", "Privacy", "Family"],
     icon: <PhoneCall aria-hidden="true" />,
@@ -314,36 +198,14 @@ const projects: Project[] = [
       "Designed around low-friction participation: call, record, and listen without requiring app literacy.",
       "Added phone-number allowlists to keep private family audio private.",
     ],
-    filename: "~/products/family-blessings/voice-journal.ts",
-    tokens: [
-      t("// Family Blessings Phone: no app install required\n", "com"),
-      t("if ", "key"),
-      t("("),
-      t("allowedCaller", "fn"),
-      t("(phoneNumber)) {\n"),
-      t("  record", "fn"),
-      t("("),
-      t('"what are you grateful for?"', "str"),
-      t(");\n"),
-      t("  notifyFamily", "fn"),
-      t("({ channel: "),
-      t('"phone"', "str"),
-      t(" });\n"),
-      t("} else {\n"),
-      t("  reject", "fn"),
-      t("("),
-      t('"private family journal"', "str"),
-      t(");\n"),
-      t("}\n"),
-    ],
   },
   {
     id: "call-a-dev",
     name: "Call a Dev",
     href: "https://call-a-dev-static.pages.dev/",
-    status: "Static archive",
+    status: "Product archive",
     tagline: "A live programming-help marketplace for getting unstuck on code.",
-    role: "Product designer and builder",
+    role: "Solo builder · Product, design, and development",
     accent: "#eaa8ff",
     tags: ["Marketplace", "Developer tools", "Voice", "Support"],
     icon: <Headphones aria-hidden="true" />,
@@ -351,28 +213,6 @@ const projects: Project[] = [
       "Framed a developer pain point as a direct service: stop pushing the ship date back and get live help.",
       "Designed two-sided marketplace language for people needing help and developers providing it.",
       "Built the positioning and interaction model around fast problem resolution.",
-    ],
-    filename: "~/products/call-a-dev/live-help.ts",
-    tokens: [
-      t("// Call a Dev: real-time code support marketplace\n", "com"),
-      t("match", "fn"),
-      t("({\n"),
-      t("  maker", "key"),
-      t(": "),
-      t('"stuck on production code"', "str"),
-      t(",\n"),
-      t("  helper", "key"),
-      t(": "),
-      t('"available problem solver"', "str"),
-      t(",\n"),
-      t("  format", "key"),
-      t(": "),
-      t('"one live call"', "str"),
-      t(",\n"),
-      t("  outcome", "key"),
-      t(": "),
-      t('"ship date protected"', "str"),
-      t("\n});\n"),
     ],
   },
 ];
@@ -489,64 +329,83 @@ function App() {
         <section className="section work-section" id="work" aria-labelledby="work-heading">
           <div className="section-heading work-heading">
             <div>
-              <EyebrowPill icon={<Code2 size={14} aria-hidden="true" />}>Selected work</EyebrowPill>
-              <h2 id="work-heading">Shipped products, founder-built.</h2>
+              <EyebrowPill icon={<Layers3 size={14} aria-hidden="true" />}>Selected work</EyebrowPill>
+              <h2 id="work-heading">Products shaped around real behavior.</h2>
             </div>
           </div>
 
           <div className="product-grid">
             {projects.map((project, index) => (
-              <details
-                className="product-card"
+              <article
+                className={`product-card ${
+                  index < 3 ? "product-card--featured" : "product-card--supporting"
+                } ${project.image ? "" : "product-card--no-image"}`}
                 key={project.id}
-                open={index === 0}
                 style={{ "--project-accent": project.accent } as CSSProperties}
               >
-                <summary>
-                  <span className="project-icon">{project.icon}</span>
-                  <span className="product-summary-copy">
+                <a
+                  className={`project-preview ${project.image ? "" : "project-preview--fallback"}`}
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Visit ${project.name}`}
+                >
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.imageAlt ?? `${project.name} product landing page`}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      style={{ objectPosition: project.imagePosition }}
+                    />
+                  ) : (
+                    <span className="preview-fallback-content">
+                      <span className="preview-fallback-icon">{project.icon}</span>
+                      <span>Product concept</span>
+                      <strong>{project.name}</strong>
+                    </span>
+                  )}
+                  <span className="preview-link-label">
+                    {project.status === "Live product" ? "Open live product" : "View product archive"}
+                    <ExternalLink size={14} aria-hidden="true" />
+                  </span>
+                </a>
+
+                <div className="product-story">
+                  <div className="product-kicker">
                     <span className="project-status">
                       <StatusDot color={project.accent} /> {project.status}
                     </span>
-                    <strong>{project.name}</strong>
-                    <span>{project.tagline}</span>
-                  </span>
-                  <span className="summary-affordance">
-                    Case file <ChevronDown size={16} aria-hidden="true" />
-                  </span>
-                </summary>
-
-                <div className="product-detail">
-                  <div className="product-meta">
-                    <p>{project.role}</p>
-                    <div className="tag-row" aria-label={`${project.name} tags`}>
-                      {project.tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
-                      ))}
-                    </div>
-                    <a className="project-link" href={project.href} target="_blank" rel="noreferrer">
-                      Visit product <ExternalLink size={14} aria-hidden="true" />
-                    </a>
                   </div>
 
-                  <MockIDE
-                    filename={project.filename}
-                    tokens={project.tokens}
-                    charMs={[1, 4]}
-                    thinkingLabel="case file"
-                    style={{ "--ide-lines": ideLineCount(project.tokens) } as CSSProperties}
-                  />
+                  <div className="product-title-row">
+                    <span className="project-icon">{project.icon}</span>
+                    <h3>{project.name}</h3>
+                  </div>
+
+                  <p className="product-tagline">{project.tagline}</p>
+                  <p className="product-role">{project.role}</p>
 
                   <ul className="case-bullets">
                     {project.bullets.map((bullet) => (
                       <li key={bullet}>
-                        <CheckCircle2 size={16} aria-hidden="true" />
+                        <span className="bullet-mark" aria-hidden="true" />
                         <span>{bullet}</span>
                       </li>
                     ))}
                   </ul>
+
+                  <div className="tag-row" aria-label={`${project.name} focus areas`}>
+                    {project.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+
+                  <a className="project-link" href={project.href} target="_blank" rel="noreferrer">
+                    {project.status === "Live product" ? `Explore ${project.name}` : "See the original product"}
+                    <ExternalLink size={14} aria-hidden="true" />
+                  </a>
                 </div>
-              </details>
+              </article>
             ))}
           </div>
         </section>
